@@ -24,7 +24,7 @@ public class Day14 {
 
     @BeforeEach
     public void init() throws IOException {
-        Files.lines(Path.of("C:\\projects\\maark-bb\\_cps_\\gwam_cps_service_auth\\src\\test\\java\\com\\mim\\gwam\\cps\\auth\\advent\\a14\\input.txt"))
+        Files.lines(Path.of("input.txt"))
             .forEach(l -> {
 
                 // read rule
