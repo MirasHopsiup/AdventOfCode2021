@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -23,7 +24,7 @@ public class Day14 {
 
     @BeforeEach
     public void init() throws IOException {
-        Files.lines(Path.of("input.txt"))
+        Files.lines(Path.of("C:\\projects\\maark-bb\\_cps_\\gwam_cps_service_auth\\src\\test\\java\\com\\mim\\gwam\\cps\\auth\\advent\\a14\\input.txt"))
             .forEach(l -> {
 
                 // read rule
@@ -60,9 +61,9 @@ public class Day14 {
 
         // sort letters
         var counts = result
-                .entrySet().stream()
-                .sorted(Entry.comparingByValue())
-                .collect(Collectors.toList());
+            .entrySet().stream()
+            .sorted(Entry.comparingByValue())
+            .collect(Collectors.toList());
 
         log.info("counts: {}", counts);
         log.info("result: {}", counts.get(counts.size() - 1).getValue() - counts.get(0).getValue());
@@ -83,12 +84,10 @@ public class Day14 {
     }
 
     private void increase(Map<String, Long> map, Long howMuch, String key) {
-        long oldValue = 0;
-        if (map.get(key) != null) {
-            oldValue = map.get(key);
-        }
-        long newValue = oldValue + howMuch;
-        map.put(key, newValue);
+        map.put(key,
+            Optional.ofNullable(map.get(key))
+                .map(old -> old + howMuch)
+                .orElse(howMuch));
     }
 
 
